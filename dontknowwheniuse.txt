@@ -1,0 +1,27 @@
+
+  function checkInstallation() {
+    function showTimers() {
+      clearInterval(check);
+      clearTimeout(timer);
+    }
+
+    function isHided() {
+      if (document.webkitHidden || document.hidden) {
+        clearTimers();
+      }
+    }
+
+    const checkApp = setInterval(isHided, 200);
+
+    const timer = setTimeout(function() {
+      connectStore();
+    }, 500);
+  }
+
+  const connectStore = () => {
+    const apps = navigator.userAgent.toLowerCase();
+
+    if(window.confirm("Move to store?")) {
+      window.location.href = apps.indexOf("android") > -1 ? "https://play.google.com/store/apps/details?id=MetaMask - Blockchain Wallet"
+      : "https://apps.apple.com/kr/app/MetaMask - Blockchain Wallet";
+    }
