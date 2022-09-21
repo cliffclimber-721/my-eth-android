@@ -1,16 +1,14 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
-import { redirect } from "@remix-run/router";
-//import { Link } from "react-router-dom"
 
 function App() {
   const [web3, setWeb3] = useState();
   const [accountMetamask, setAccountMetamask] = useState("");
-  const connectApp = () =>{
-     webToApp();
+  const connectApp = () => {
+    webToApp();
   }
-
+  
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -22,22 +20,21 @@ function App() {
     }
   }, []);
 
-  const connectMetamask = async () => {
+  async function connectMetamask() {
   let accountsForMeta = await window.ethereum.request({
      method: "eth_requestAccounts",
-  });
-     setAccountMetamask(accountsForMeta[0]);
+  }); setAccountMetamask(accountsForMeta[0]);
   };
 
-  function webToApp() {
-    const url = "https://metamask.app.link/dapp/eth-android";
-    window.location.href = url;
+  async function webToApp() {
+      const url = "https://metamask.app.link/dapp/eth-android";
+      window.location.href = url;
   };
 
   // HTML5
   return (
       <div className="App">
-        <button className="metaConnect" onClick={() => { connectApp(); connectMetamask()}}>
+        <button className="metaConnect" onClick={() => { connectMetamask() ; connectApp()}}>
           Connect with Metamask
         </button>
         <div className="userInfo">Metamask: { accountMetamask }</div>
